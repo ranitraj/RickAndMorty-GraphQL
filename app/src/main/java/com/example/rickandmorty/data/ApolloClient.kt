@@ -11,13 +11,16 @@ class ApolloClient(
     private val apolloClient: ApolloClient
 ): CharacterClient {
 
-    override suspend fun getCharacters(pageNumber: Int): CharactersResult? {
+    override suspend fun getCharacters(pageNumber: Int): CharactersResult {
         return apolloClient
             .query(CharactersQuery(page = Optional.present(pageNumber)))
             .execute()
             .data
             ?.characters
-            ?.toCharactersResult()
+            ?.toCharactersResult() ?: CharactersResult(
+                results = emptyList(),
+                info = null
+            )
     }
 
 }

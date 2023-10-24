@@ -18,6 +18,7 @@ fun CharactersQuery.Characters.toCharactersResult(): CharactersResult {
 
 fun CharactersQuery.Result.toCharacter(): Character {
     return Character(
+        id = id,
         image = image,
         gender = gender,
         name = name,
