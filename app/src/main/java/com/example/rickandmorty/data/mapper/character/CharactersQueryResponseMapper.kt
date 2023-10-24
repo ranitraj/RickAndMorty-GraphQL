@@ -11,7 +11,7 @@ fun CharactersQuery.Characters.toCharactersResult(): CharactersResult {
         results = results
             ?.map { curCharacterResult ->
                 curCharacterResult?.toCharacter()
-            },
+            } ?: emptyList(),     // Return empty list if 'results' is null
         info = info?.toInfo()
     )
 }
