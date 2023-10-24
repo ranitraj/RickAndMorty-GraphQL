@@ -1,4 +1,4 @@
-package com.example.rickandmorty.domain.character
+package com.example.rickandmorty.domain.character.dto
 
 /**
  * Pagination Support for Character API

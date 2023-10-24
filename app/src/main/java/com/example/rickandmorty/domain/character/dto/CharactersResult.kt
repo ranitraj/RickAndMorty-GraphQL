@@ -1,4 +1,4 @@
-package com.example.rickandmorty.domain.character
+package com.example.rickandmorty.domain.character.dto
 
 data class CharactersResult(
     val results: List<Character?>?,

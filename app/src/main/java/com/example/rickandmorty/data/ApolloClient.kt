@@ -5,7 +5,7 @@ import com.apollographql.apollo3.api.Optional
 import com.example.CharactersQuery
 import com.example.rickandmorty.data.mapper.character.toCharactersResult
 import com.example.rickandmorty.domain.character.CharacterClient
-import com.example.rickandmorty.domain.character.CharactersResult
+import com.example.rickandmorty.domain.character.dto.CharactersResult
 
 class ApolloClient(
     private val apolloClient: ApolloClient
