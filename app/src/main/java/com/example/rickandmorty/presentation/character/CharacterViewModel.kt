@@ -2,7 +2,6 @@ package com.example.rickandmorty.presentation.character
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rickandmorty.domain.character.dto.Character
 import com.example.rickandmorty.domain.character.dto.CharactersResult
 import com.example.rickandmorty.domain.character.usecase.GetCharactersUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +16,9 @@ class CharacterViewModel(
     private val _state = MutableStateFlow(CharactersState())
     val state = _state.asStateFlow()    // UI has immutable state of the StateFlow & only ViewModel can change it
 
-    // State Data Class
+    /**
+     * Data Class comprising of parameters defining the State of the CharactersResult
+     */
     data class CharactersState(
         val charactersResult: CharactersResult? = CharactersResult(
             emptyList(),
@@ -26,8 +27,10 @@ class CharacterViewModel(
         val isLoading: Boolean = false
     )
 
+    /**
+     * Initially, set 'isLoading' flag to 'true' & then make API call to get characters
+     */
     init {
-        // Initially, set 'isLoading' flag to 'true' & then make API call to get characters
         viewModelScope.launch {
             _state.update {
                 it.copy(
@@ -38,6 +41,23 @@ class CharacterViewModel(
             _state.update {
                 it.copy(
                     charactersResult = getCharactersUseCase.execute(1),
+                    isLoading = false
+                )
+            }
+        }
+    }
+
+    /**
+     * Fetches the response from the CharactersQuery.CharactersResult API by making
+     * use of the parameter 'pageNumber' for Pagination
+     *
+     * @param pageNumber - pageCount for current response
+     */
+    fun getCharacters(pageNumber: Int) {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    charactersResult = getCharactersUseCase.execute(pageNumber),
                     isLoading = false
                 )
             }
