@@ -20,7 +20,7 @@ class CharacterViewModel(
      * Data Class comprising of parameters defining the State of the CharactersResult
      */
     data class CharactersState(
-        val charactersResult: CharactersResult? = CharactersResult(
+        val charactersResult: CharactersResult = CharactersResult(
             emptyList(),
             info = null
         ),
@@ -28,7 +28,8 @@ class CharacterViewModel(
     )
 
     /**
-     * Initially, set 'isLoading' flag to 'true' & then make API call to get characters
+     * Initially, set 'isLoading' flag to 'true' & then make API call to get initial
+     * set of characters by passing '1' as the pageNumber
      */
     init {
         viewModelScope.launch {
